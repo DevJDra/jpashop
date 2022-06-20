@@ -19,6 +19,15 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        //변경감지기능 사용
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setPrice(price);
+        findItem.setName(name);
+        findItem.setStockQuantity(stockQuantity);
+    }
+
     public List<Item> findItems() {
         return itemRepository.findAll();
     }
